@@ -4,7 +4,7 @@ from google.oauth2 import service_account
 from googleapiclient import discovery
 from googleapiclient.errors import HttpError
 
-from app.constants import GOOGLE_SERVICE_ACCOUNT_CREDENTIALS, REBOOKINGS_SPREADSHEET_ID
+from app.constants import GOOGLE_SERVICE_ACCOUNT_CREDENTIALS
 
 
 class GoogleSheets:

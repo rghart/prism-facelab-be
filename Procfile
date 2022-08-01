@@ -1,0 +1,1 @@
+web: gunicorn prism:app

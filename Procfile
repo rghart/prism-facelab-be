@@ -1,1 +1,1 @@
-web: gunicorn prism:app
+web: gunicorn app.prism:app

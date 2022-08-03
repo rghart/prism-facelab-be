@@ -1,10 +1,13 @@
 import json
+import logging
 
 from google.oauth2 import service_account
 from googleapiclient import discovery
 from googleapiclient.errors import HttpError
 
 from app.constants import GOOGLE_SERVICE_ACCOUNT_CREDENTIALS
+
+logger = logging.getLogger(__name__)
 
 
 class GoogleSheets:
@@ -20,21 +23,25 @@ class GoogleSheets:
         value_input_option='RAW',
         insert_data_option='INSERT_ROWS',
     ):
-        request = self.sheet.values().append(
-            spreadsheetId=spreadsheet_id,
-            range=spreadsheet_range,
-            valueInputOption=value_input_option,
-            insertDataOption=insert_data_option,
-            body=body_data,
-        )
-        response = request.execute()
-        return response
+        try:
+            request = self.sheet.values().append(
+                spreadsheetId=spreadsheet_id,
+                range=spreadsheet_range,
+                valueInputOption=value_input_option,
+                insertDataOption=insert_data_option,
+                body={'values': body_data},
+            )
+            response = request.execute()
+            return response
+        except HttpError as err:
+            logger.error(f'HttpError: {err.status_code}, {err.reason}. Details: {err.error_details}')
+            raise HttpError
 
     def get_values_from_sheet(
         self,
         spreadsheet_id,
         spreadsheet_range,
-        major_dimension="ROWS",
+        major_dimension='ROWS',
         value_render_option='FORMATTED_VALUE',
     ):
         try:
@@ -48,7 +55,8 @@ class GoogleSheets:
             return result.get('values', [])
 
         except HttpError as err:
-            print(err)
+            logger.error(f'HttpError: {err.status_code}, {err.reason}. Details: {err.error_details}')
+            raise HttpError
 
     @staticmethod
     def _construct_credentials():

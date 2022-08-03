@@ -17,7 +17,7 @@ def client_created():
     request_json = request.get_json()
     logger.info(request_json)
 
-    if request_json.get('eventType') == "PING":
+    if request_json.get('event') == "ping":
         logger.info(f"Received ping for {request_json.get('url')}. ID: {request_json.get('webhookId')}")
         return request_json
 

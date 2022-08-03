@@ -1,31 +1,20 @@
 # WIP - using for testing
 import requests
 
-from app.constants import BOULEVARD_LOCATION_ID
+from app.constants import BOULEVARD_CLIENT_CREATED_WEBHOOK_ID
 from app.services.boulevard_auth_constructor import construct_boulevard_auth
 
 endpoint = "https://dashboard.boulevard.io/api/2020-01/admin"
 gql_query = f"""
 mutation {{
-  createWebhook(
-    input: {{
-      locationId: "urn:blvd:Location:{BOULEVARD_LOCATION_ID}"
-      url: "https://prism-be.herokuapp.com/blvd/client_created"
-      name: "Prism Client Created"
-      subscriptions: [{{ eventType: CLIENT_CREATED }}]
-    }}
-  ) {{
+  pingWebhook(input: {{ id: "{BOULEVARD_CLIENT_CREATED_WEBHOOK_ID}" }}) {{
     webhook {{
       id
-      subscriptions {{
-        id
-        enabled
-        eventType
-      }}
     }}
   }}
 }}
 """
+
 basic_auth = construct_boulevard_auth()
 r = requests.post(
     endpoint,

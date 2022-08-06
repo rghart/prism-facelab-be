@@ -15,7 +15,6 @@ blueprint = Blueprint('blvd_client_created', __name__, url_prefix='/blvd')
 @blueprint.route('/client_created', methods=['POST'])
 def client_created():
     request_json = request.get_json()
-    logger.info(request_json)
 
     if request_json.get('event') == "ping":
         logger.info(f"Received ping for {request_json.get('url')}. ID: {request_json.get('webhookId')}")

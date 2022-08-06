@@ -1,19 +1,19 @@
 # WIP - using for testing
+import datetime
+
+import pytz
 import requests
 
-from app.constants import BOULEVARD_CLIENT_CREATED_WEBHOOK_ID
+from app.constants import BOULEVARD_CLIENT_CREATED_WEBHOOK_ID, BOULEVARD_LOCATION_ID
+from app.gql_queries.client import client_query
+from app.gql_queries.list_appointments import list_appointments_query
 from app.services.boulevard_auth_constructor import construct_boulevard_auth
 
 endpoint = "https://dashboard.boulevard.io/api/2020-01/admin"
-gql_query = f"""
-mutation {{
-  pingWebhook(input: {{ id: "{BOULEVARD_CLIENT_CREATED_WEBHOOK_ID}" }}) {{
-    webhook {{
-      id
-    }}
-  }}
-}}
-"""
+dttz = datetime.datetime.now(pytz.timezone('US/Central'))
+dttz_new = dttz.replace(microsecond=0)
+gql_query = list_appointments_query()
+print(gql_query)
 
 basic_auth = construct_boulevard_auth()
 r = requests.post(

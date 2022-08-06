@@ -1,3 +1,5 @@
+from enum import Enum
+
 from dotenv import load_dotenv
 import os
 
@@ -12,3 +14,14 @@ BOULEVARD_CLIENT_CREATED_WEBHOOK_ID = os.environ.get('BOULEVARD_CLIENT_CREATED_W
 
 GOOGLE_SERVICE_ACCOUNT_CREDENTIALS = os.environ.get('GOOGLE_SERVICE_ACCOUNT_CREDENTIALS')
 REBOOKINGS_SPREADSHEET_ID = os.environ.get('REBOOKINGS_SPREADSHEET_ID')
+
+
+class SheetHeaderIndex(Enum):
+    CLIENT_ID = 0
+    CLIENT_NAME = 1
+    INITIAL_APPT_BOOKED = 2
+    REBOOKED = 3
+    INITIAL_APPT_COUNT = 4
+    INPUT_TIME = 5
+    CLIENT_CREATED_TIME = 6
+

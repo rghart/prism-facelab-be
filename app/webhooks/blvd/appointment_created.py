@@ -27,33 +27,48 @@ def appointment_created():
     )[0]
 
     try:
-        # Just checking if value exists for now - if it does not, a ValueError is raised
-        sheet_client_ids.index(appt_client_id) + 2
+        # Checking if value exists - if it does not, a ValueError is raised
+        row_number = sheet_client_ids.index(appt_client_id) + 2
+
+        row_data = google_sheets.get_values_from_sheet(
+            REBOOKINGS_SPREADSHEET_ID, f'rebookings!{row_number}:{row_number}'
+        )[0]
+        current_time = datetime.datetime.now()
+        sheet_input_datetime = datetime.datetime.fromisoformat(row_data[SheetHeaderIndex.INPUT_TIME.value])
+
+        if row_data[SheetHeaderIndex.INITIAL_APPT_BOOKED.value] == 'FALSE':
+            row_data[SheetHeaderIndex.INITIAL_APPT_BOOKED.value] = 'TRUE'
+        elif sheet_input_datetime <= current_time <= (sheet_input_datetime + datetime.timedelta(seconds=15)):
+            logger.info(f"Initial appt already booked: {row_data}")
+            return {'row_data': row_data}
+        elif row_data[SheetHeaderIndex.REBOOKED.value] == 'FALSE':
+            row_data[SheetHeaderIndex.REBOOKED.value] = 'TRUE'
+        else:
+            return {'row_data': row_data}
+
+        row_data[SheetHeaderIndex.ROW_LAST_UPDATED_TIME.value] = str(current_time)
 
         body_data = [[
             appt_client_id,
-            str(datetime.datetime.now()),
+            str(current_time),
             str(client_data),
         ]]
 
-        updated_values_response = google_sheets.append_to_sheet(
+        rebookings_update_response = google_sheets.update_sheet(
+            REBOOKINGS_SPREADSHEET_ID,
+            f'rebookings!{row_number}:{row_number}',
+            [row_data],
+        )
+        google_sheets.append_to_sheet(
             REBOOKINGS_SPREADSHEET_ID,
             'new_client_appointments!A:A',
             body_data,
         )
 
-        updates = updated_values_response.get("updates")
-        logger.info(f'Updated sheet with new Boulevard Appointment: {updates}')
+        logger.info(f'Updated sheet with new Boulevard Appointment: {rebookings_update_response}')
 
-        return updated_values_response
+        return rebookings_update_response
 
-        # row_data = google_sheets.get_values_from_sheet(
-        #     REBOOKINGS_SPREADSHEET_ID, f'rebookings!{row_index}:{row_index}'
-        # )[0]
-        # if row_data[SheetHeaderIndex.INITIAL_APPT_BOOKED.value] == 'FALSE':
-        #     row_data[SheetHeaderIndex.INITIAL_APPT_BOOKED.value] = 'TRUE'
-        # elif
-        # print(row_data)
     except ValueError:
         logger.info(f'NOT FOUND: Attempted to find client_id {appt_client_id} in google sheet.')
         return request_json

@@ -12,6 +12,7 @@ from app.services.boulevard_auth_constructor import construct_boulevard_auth
 endpoint = "https://dashboard.boulevard.io/api/2020-01/admin"
 dttz = datetime.datetime.now(pytz.timezone('US/Central'))
 dttz_new = dttz.replace(microsecond=0)
+query_date = str(dttz_new).split(" ")[0]
 gql_query = list_appointments_query()
 print(gql_query)
 

@@ -37,6 +37,27 @@ class GoogleSheets:
             logger.error(f'HttpError: {err.status_code}, {err.reason}. Details: {err.error_details}')
             raise HttpError
 
+    def update_sheet(
+        self,
+        spreadsheet_id,
+        spreadsheet_range,
+        body_data,
+        value_input_option='RAW',
+    ):
+        try:
+            request = self.sheet.values().update(
+                spreadsheetId=spreadsheet_id,
+                range=spreadsheet_range,
+                valueInputOption=value_input_option,
+                includeValuesInResponse=True,
+                body={'values': body_data},
+            )
+            response = request.execute()
+            return response
+        except HttpError as err:
+            logger.error(f'HttpError: {err.status_code}, {err.reason}. Details: {err.error_details}')
+            raise HttpError
+
     def get_values_from_sheet(
         self,
         spreadsheet_id,

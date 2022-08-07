@@ -24,4 +24,5 @@ class SheetHeaderIndex(Enum):
     INITIAL_APPT_COUNT = 4
     INPUT_TIME = 5
     CLIENT_CREATED_TIME = 6
+    ROW_LAST_UPDATED_TIME = 7
 

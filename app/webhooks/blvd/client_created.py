@@ -25,14 +25,17 @@ def client_created():
         return request_json
 
     client_data = request_json.get('data', {}).get('node')
+    appointment_count = client_data.get('appointmentCount', 0)
+    current_time_str = str(datetime.datetime.now())
     body_data = [[
         client_data['id'],
         client_data['name'],
+        True if appointment_count > 0 else False,
         False,
-        False,
-        client_data.get('appointmentCount', 0),
-        str(datetime.datetime.now()),
-        client_data.get('createdAt')
+        appointment_count,
+        current_time_str,
+        client_data.get('createdAt'),
+        current_time_str,
     ]]
     updated_values_response = google_sheets.append_to_sheet(
         REBOOKINGS_SPREADSHEET_ID,

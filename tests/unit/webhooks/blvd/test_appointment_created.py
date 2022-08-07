@@ -1,3 +1,5 @@
+# flake8: noqa: E501
+
 import datetime
 
 from freezegun import freeze_time

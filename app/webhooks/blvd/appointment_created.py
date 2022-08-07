@@ -17,7 +17,8 @@ def appointment_created():
 
     if request_json.get("event") == "ping":
         logger.info(
-            f"Received ping for {request_json.get('url')}. ID: {request_json.get('webhookId')}"
+            f"Received ping for {request_json.get('url')}. "
+            f"ID: {request_json.get('webhookId')}"
         )
         return request_json
 
@@ -76,7 +77,8 @@ def appointment_created():
         )
 
         logger.info(
-            f"Updated sheet with new Boulevard Appointment: {rebookings_update_response}"
+            f"Updated sheet with new Boulevard Appointment: "
+            f"{rebookings_update_response}"
         )
 
         return rebookings_update_response

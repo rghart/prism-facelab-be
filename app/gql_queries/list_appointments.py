@@ -9,7 +9,7 @@ def list_appointments_query(
           appointments(
             locationId: "urn:blvd:Location:{location_id}",
             first: {first_int},
-            clientID: "urn:blvd:Client:{client_id}", 
+            clientID: "urn:blvd:Client:{client_id}",
             query: "{query_str if query_str else ''}",
           ) {{
             edges {{
@@ -30,14 +30,14 @@ def list_appointments_query(
                     name
                     symbol
                 }}
-        
+
                 client {{
                   firstName
                   lastName
                   email
                   mobilePhone
                 }}
-        
+
                 appointmentServices {{
                   id
                   startAt
@@ -49,14 +49,14 @@ def list_appointments_query(
                       name
                     }}
                   }}
-        
+
                   staffRequested
                   staff {{
                     firstName
                     lastName
                     email
                     mobilePhone
-        
+
                     role {{
                       name
                     }}
@@ -64,7 +64,7 @@ def list_appointments_query(
                 }}
               }}
             }}
-        
+
             pageInfo {{
               endCursor
               hasNextPage

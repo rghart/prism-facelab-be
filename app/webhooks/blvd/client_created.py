@@ -18,12 +18,13 @@ def client_created():
 
     if request_json.get("event") == "ping":
         logger.info(
-            f"Received ping for {request_json.get('url')}. ID: {request_json.get('webhookId')}"
+            f"Received ping for {request_json.get('url')}. "
+            f"ID: {request_json.get('webhookId')}"
         )
         return request_json
 
     if request_json.get("data", {}).get("createWebhook", False):
-        logger.info(f"Webhook created for client_created endpoint")
+        logger.info("Webhook created for client_created endpoint")
         return request_json
 
     client_data = request_json.get("data", {}).get("node")

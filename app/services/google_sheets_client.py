@@ -37,7 +37,8 @@ class GoogleSheets:
             return response
         except HttpError as err:
             logger.error(
-                f"HttpError: {err.status_code}, {err.reason}. Details: {err.error_details}"
+                f"HttpError: {err.status_code}, {err.reason}. "
+                f"Details: {err.error_details}"
             )
             raise HttpError
 
@@ -60,7 +61,8 @@ class GoogleSheets:
             return response
         except HttpError as err:
             logger.error(
-                f"HttpError: {err.status_code}, {err.reason}. Details: {err.error_details}"
+                f"HttpError: {err.status_code}, {err.reason}. "
+                f"Details: {err.error_details}"
             )
             raise HttpError
 
@@ -87,7 +89,8 @@ class GoogleSheets:
 
         except HttpError as err:
             logger.error(
-                f"HttpError: {err.status_code}, {err.reason}. Details: {err.error_details}"
+                f"HttpError: {err.status_code}, "
+                f"{err.reason}. Details: {err.error_details}"
             )
             raise HttpError
 

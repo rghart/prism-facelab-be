@@ -4,8 +4,6 @@ import datetime
 import pytz
 import requests
 
-from app.constants import BOULEVARD_CLIENT_CREATED_WEBHOOK_ID, BOULEVARD_LOCATION_ID
-from app.gql_queries.client import client_query
 from app.gql_queries.list_appointments import list_appointments_query
 from app.services.boulevard_auth_constructor import construct_boulevard_auth
 

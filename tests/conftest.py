@@ -5,9 +5,11 @@ from app import prism
 
 @pytest.fixture
 def app():
-    prism.app.config.update({
-        "TESTING": True,
-    })
+    prism.app.config.update(
+        {
+            "TESTING": True,
+        }
+    )
     return prism.app
 
 

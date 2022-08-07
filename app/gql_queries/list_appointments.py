@@ -1,7 +1,9 @@
 from app.constants import BOULEVARD_LOCATION_ID
 
 
-def list_appointments_query(client_id, query_str=None, location_id=BOULEVARD_LOCATION_ID, first_int=100):
+def list_appointments_query(
+    client_id, query_str=None, location_id=BOULEVARD_LOCATION_ID, first_int=100
+):
     return f"""
         query ListAppointments {{
           appointments(

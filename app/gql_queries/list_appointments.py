@@ -1,13 +1,15 @@
 from app.constants import BOULEVARD_LOCATION_ID
 
 
-def list_appointments_query(client_id, query_str=None, location_id=BOULEVARD_LOCATION_ID, first_int=100):
+def list_appointments_query(
+    client_id, query_str=None, location_id=BOULEVARD_LOCATION_ID, first_int=100
+):
     return f"""
         query ListAppointments {{
           appointments(
             locationId: "urn:blvd:Location:{location_id}",
             first: {first_int},
-            clientID: "urn:blvd:Client:{client_id}", 
+            clientID: "urn:blvd:Client:{client_id}",
             query: "{query_str if query_str else ''}",
           ) {{
             edges {{
@@ -28,14 +30,14 @@ def list_appointments_query(client_id, query_str=None, location_id=BOULEVARD_LOC
                     name
                     symbol
                 }}
-        
+
                 client {{
                   firstName
                   lastName
                   email
                   mobilePhone
                 }}
-        
+
                 appointmentServices {{
                   id
                   startAt
@@ -47,14 +49,14 @@ def list_appointments_query(client_id, query_str=None, location_id=BOULEVARD_LOC
                       name
                     }}
                   }}
-        
+
                   staffRequested
                   staff {{
                     firstName
                     lastName
                     email
                     mobilePhone
-        
+
                     role {{
                       name
                     }}
@@ -62,7 +64,7 @@ def list_appointments_query(client_id, query_str=None, location_id=BOULEVARD_LOC
                 }}
               }}
             }}
-        
+
             pageInfo {{
               endCursor
               hasNextPage

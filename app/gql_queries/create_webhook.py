@@ -1,7 +1,9 @@
 from app.constants import BOULEVARD_LOCATION_ID
 
 
-def create_webhook(url: str, name: str, event_type: str, location_id: str = BOULEVARD_LOCATION_ID):
+def create_webhook(
+    url: str, name: str, event_type: str, location_id: str = BOULEVARD_LOCATION_ID
+):
     return f"""
         mutation {{
           createWebhook(

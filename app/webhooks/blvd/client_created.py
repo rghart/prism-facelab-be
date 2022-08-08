@@ -23,10 +23,6 @@ def client_created():
         )
         return request_json
 
-    if request_json.get("data", {}).get("createWebhook", False):
-        logger.info("Webhook created for client_created endpoint")
-        return request_json
-
     client_data = request_json.get("data", {}).get("node")
     appointment_count = client_data.get("appointmentCount", 0)
     current_time_str = str(datetime.datetime.now())

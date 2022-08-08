@@ -1,0 +1,7 @@
+{
+  "event": "ping",
+  "eventType": "PING",
+  "success": true,
+  "url": "https://my-domain/my-webhook-endpoint",
+  "webhookId": "urn:blvd:Webhook:47ddad57-74bc-4f3f-b102-d42b0c918adb"
+}

@@ -1,0 +1,23 @@
+{
+    "data": {
+        "node": {
+            "__typename": "Client",
+            "dob": null,
+            "email": "joseph.wellington@gmail.com",
+            "externalId": null,
+            "firstName": "Joseph",
+            "id": "urn:blvd:Client:ea9eea9f-df94-45ad-9d0b-88e1d33b2dd2",
+            "lastName": "Wellington",
+            "mobilePhone": "+14802396868",
+            "name": "Joseph Wellington",
+            "appointmentCount": 1,
+            "createdAt": "2022-08-07T15:35:19.436324Z"
+        }
+    },
+    "businessId": "urn:blvd:Business:4d91175a-bf12-4420-be8a-4822a5093da3",
+    "apiApplicationId": "urn:blvd:ApiApplication:60fb5218-dc1d-45da-ac85-1740b7b86e19",
+    "webhookId": "urn:blvd:Webhook:bc5661b6-0e87-4a23-ad52-314b47308fa1",
+    "event": "client.created",
+    "eventType": "CLIENT_CREATED",
+    "resource": "Client"
+}
